@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1f2e;
+  --border: #2a2f3e;
+  --accent: #00d4ff;
+  --warn: #ff6b35;
+  --success: #00ff88;
+  --danger: #ff3355;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: #e0e6f0;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3f4e; }
+
+/* Konva canvas cursor */
+.konvajs-content canvas { cursor: crosshair; }
+.konvajs-content canvas.select-mode { cursor: default; }
+
+/* Particle animation */
+@keyframes flowParticle {
+  0% { opacity: 0; transform: translateX(0); }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(var(--travel)); }
+}
+
+/* Oscilloscope glow */
+.osc-screen {
+  background: #020a04;
+  border: 1px solid #003300;
+  box-shadow: inset 0 0 20px rgba(0,255,0,0.05), 0 0 10px rgba(0,200,0,0.1);
+}
+
+/* Glow effects */
+.glow-accent { box-shadow: 0 0 8px var(--accent); }
+.glow-danger  { box-shadow: 0 0 8px var(--danger); }
+.glow-success { box-shadow: 0 0 8px var(--success); }
+
+/* Component palette item */
+.palette-item {
+  @apply flex flex-col items-center gap-1 p-2 rounded-lg cursor-grab
+         border border-border bg-surface hover:border-accent hover:bg-surface
+         transition-all duration-150 select-none text-xs text-center;
+}
+.palette-item:active { cursor: grabbing; }
+
+/* Panel header */
+.panel-header {
+  @apply text-xs font-semibold uppercase tracking-widest text-accent/70
+         px-3 py-2 border-b border-border;
+}
+
+/* Instrument panel */
+.instrument-tab {
+  @apply px-3 py-1.5 text-xs rounded-t cursor-pointer border-b-2
+         border-transparent hover:text-accent transition-colors;
+}
+.instrument-tab.active {
+  @apply border-accent text-accent bg-surface;
+}
+
+/* Node voltage heat-map colors defined in JS */
